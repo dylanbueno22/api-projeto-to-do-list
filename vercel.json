@@ -5,7 +5,8 @@
       "src": "src/main.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["src/**"]
+        "includeFiles": ["src/**"],
+        "maxDuration": 30
       }
     }
   ],
@@ -15,11 +16,6 @@
       "dest": "src/main.ts"
     }
   ],
-  "functions": {
-    "src/main.ts": {
-      "maxDuration": 30
-    }
-  },
   "env": {
     "NODE_ENV": "production",
     "VERCEL": "true"

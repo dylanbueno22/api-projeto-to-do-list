@@ -9,7 +9,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:5173', // Frontend local
       'http://localhost:3000', // Backend local
-      'https://your-frontend-domain.vercel.app', // Substitua pelo seu domínio
+      'https://to-do-list-inky-kappa.vercel.app', // Seu frontend no Vercel
       'https://your-frontend-domain.netlify.app', // Substitua pelo seu domínio
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

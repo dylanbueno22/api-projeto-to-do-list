@@ -6,8 +6,11 @@ async function bootstrap() {
 
   // Habilitar CORS para permitir acesso do frontend
   app.enableCors({
-    origin:
-      'https://api-projeto-to-do-list-37p1z0ui0-dylanbueno22s-projects.vercel.app', // Base URL do seu frontend
+    origin: [
+      'https://to-do-list-two-beta-66.vercel.app', // Seu frontend atual
+      'https://to-do-list-nzepzy0gb-dylanbueno22s-projects.vercel.app', // Outro frontend
+      'http://localhost:5173', // Para desenvolvimento local
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Authorization',
     credentials: true,

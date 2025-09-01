@@ -6,5 +6,5 @@ export const vercelConfig: TypeOrmModuleOptions = {
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: true,
   logging: false,
-  dropSchema: true, // Recria o banco a cada deploy
+  dropSchema: false, // Não recria o banco a cada deploy
 };

@@ -8,11 +8,11 @@ export const supabaseConfig: TypeOrmModuleOptions = {
   password: process.env.SUPABASE_PASSWORD || 'dylan@30331007',
   database: process.env.SUPABASE_DATABASE || 'postgres',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  synchronize: process.env.NODE_ENV !== 'production',
+  synchronize: true, // Vercel recria o banco a cada deploy
   ssl: {
     rejectUnauthorized: false,
   },
-  logging: process.env.NODE_ENV === 'development',
+  logging: false, // Desabilitar logs em produção
   extra: {
     ssl: {
       rejectUnauthorized: false,

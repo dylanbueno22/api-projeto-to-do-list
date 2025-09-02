@@ -1,2 +1,7 @@
-# Ignorar deploy no Vercel
-*
+\# Arquivos que devem ser ignorados no deploy
+node_modules/
+.git/
+.env
+*.log
+dist/
+.vercel/

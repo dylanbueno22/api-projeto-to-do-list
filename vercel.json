@@ -3,23 +3,20 @@
   "builds": [
     {
       "src": "src/main.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["src/**"],
-        "maxDuration": 30
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/main.ts",
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Credentials": "true"
-      }
+      "dest": "src/main.ts"
     }
-  ]
+  ],
+  "env": {
+    "SUPABASE_HOST": "db.zyjdzpdtuyyerflizikq.supabase.co",
+    "SUPABASE_PORT": "5432",
+    "SUPABASE_USER": "postgres",
+    "SUPABASE_PASSWORD": "dylan@30331007",
+    "SUPABASE_DATABASE": "postgres"
+  }
 }

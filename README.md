@@ -1,21 +1,21 @@
 # 📋 Todo API Backend
 
-API REST completa para gerenciamento de tarefas e grupos, construída com NestJS e TypeORM.
+API REST completa para gerenciamento de tarefas e grupos, construída com NestJS e TypeORM, conectada ao Supabase (PostgreSQL).
 
 ## 🚀 Tecnologias
 
-- **NestJS** - Framework Node.js
+- **NestJS** - Framework Node.js para APIs
 - **TypeORM** - ORM para banco de dados
-- **SQLite** - Banco de dados (desenvolvimento)
+- **PostgreSQL** - Banco de dados via Supabase
 - **TypeScript** - Linguagem de programação
+- **Vercel** - Plataforma de deploy
 
 ## 📁 Estrutura do Projeto
 
 ```
 src/
 ├── config/
-│   ├── database.config.ts    # Configuração do banco
-│   └── vercel.config.ts      # Configuração para Vercel
+│   └── supabase.config.ts    # Configuração do Supabase
 ├── groups/
 │   ├── group.entity.ts       # Entidade Group
 │   ├── groups.controller.ts  # Controller de grupos
@@ -27,6 +27,7 @@ src/
 │   ├── tasks.service.ts      # Service de tarefas
 │   └── tasks.module.ts       # Módulo de tarefas
 ├── app.module.ts             # Módulo principal
+├── app.controller.ts         # Controller principal
 └── main.ts                   # Arquivo de inicialização
 ```
 
@@ -44,6 +45,22 @@ npm run build
 
 # Executar em produção
 npm run start:prod
+```
+
+## 🌐 Variáveis de Ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```bash
+# Supabase Configuration
+SUPABASE_HOST=db.zyjdzpdtuyyerflizikq.supabase.co
+SUPABASE_PORT=5432
+SUPABASE_USER=postgres
+SUPABASE_PASSWORD=sua_senha_aqui
+SUPABASE_DATABASE=postgres
+
+# Environment
+NODE_ENV=development
 ```
 
 ## 📡 Endpoints da API
@@ -76,7 +93,6 @@ npm run start:prod
 {
   id: number;
   title: string;
-  completed: boolean;
   status: 'pending' | 'in-progress' | 'completed';
   createdAt: Date;
 }
@@ -115,9 +131,71 @@ curl -X PATCH http://localhost:3000/tasks/1/status \
   -d '{"status": "completed"}'
 ```
 
-## 🚀 Deploy
+## 🚀 Deploy no Vercel
 
-Veja o arquivo [DEPLOY.md](./DEPLOY.md) para instruções completas de deploy no Vercel.
+### ⚠️ **IMPORTANTE: Configurar Variáveis de Ambiente PRIMEIRO!**
+
+Antes de fazer o deploy, você **DEVE** configurar as variáveis de ambiente no dashboard da Vercel:
+
+#### **1. Vá para:** https://vercel.com/dylanbueno22s-projects/todo-backend
+#### **2. Settings → Environment Variables**
+#### **3. Adicione EXATAMENTE estas variáveis:**
+
+| **Name** | **Value** | **Environment** |
+|----------|-----------|-----------------|
+| `SUPABASE_HOST` | `db.zyjdzpdtuyyerflizikq.supabase.co` | Production ✅ |
+| `SUPABASE_PORT` | `5432` | Production ✅ |
+| `SUPABASE_USER` | `postgres` | Production ✅ |
+| `SUPABASE_PASSWORD` | `dylan@30331007` | Production ✅ |
+| `SUPABASE_DATABASE` | `postgres` | Production ✅ |
+
+**⚠️ SEM essas variáveis, a API NÃO funcionará!**
+
+### **4. Fazer Deploy**
+
+```bash
+# Instalar Vercel CLI (se não tiver)
+npm i -g vercel
+
+# Login na Vercel
+vercel login
+
+# Deploy para produção
+vercel --prod
+```
+
+### **5. Verificar Deploy**
+
+Após o deploy, verifique:
+- ✅ **Build:** Deve ser bem-sucedido
+- ✅ **Functions:** Deve mostrar logs sem erro
+- ✅ **Variáveis:** Devem estar configuradas como Production
+
+### **6. Testar API**
+
+```bash
+# Testar endpoint raiz
+curl https://seu-projeto.vercel.app/
+
+# Testar endpoint de tarefas
+curl https://seu-projeto.vercel.app/tasks
+
+# Testar endpoint de grupos
+curl https://seu-projeto.vercel.app/groups
+```
+
+### **🚨 Problemas Comuns:**
+
+1. **Erro 500:** Variáveis de ambiente não configuradas
+2. **Erro 404:** Deploy falhou ou não foi aplicado
+3. **CORS:** Configurado automaticamente no código
+
+### **🔗 URL da API**
+
+Após deploy bem-sucedido, sua API estará em:
+```
+https://seu-projeto.vercel.app
+```
 
 ## 📝 Licença
 

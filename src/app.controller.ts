@@ -14,4 +14,21 @@ export class AppController {
       },
     };
   }
+
+  @Get('test')
+  getTest(): object {
+    return {
+      message: 'API funcionando!',
+      timestamp: new Date().toISOString(),
+      env: {
+        SUPABASE_HOST: process.env.SUPABASE_HOST || 'não definido',
+        SUPABASE_PORT: process.env.SUPABASE_PORT || 'não definido',
+        SUPABASE_USER: process.env.SUPABASE_USER || 'não definido',
+        SUPABASE_DATABASE: process.env.SUPABASE_DATABASE || 'não definido',
+        SUPABASE_PASSWORD: process.env.SUPABASE_PASSWORD
+          ? '***'
+          : 'não definido',
+      },
+    };
+  }
 }
